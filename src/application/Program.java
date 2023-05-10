@@ -41,5 +41,7 @@ public class Program {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+
+        sc.close();
     }
 }
