@@ -10,6 +10,7 @@ public class Program {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
+
         try {
             System.out.println("Enter account data");
             System.out.print("Number: ");
