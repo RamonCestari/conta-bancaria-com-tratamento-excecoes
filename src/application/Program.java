@@ -1,6 +1,7 @@
 package application;
 
 import model.entities.Account;
+import model.exceptions.BusinessExceptions;
 
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -11,37 +12,36 @@ public class Program {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
+
+        System.out.println("Enter account data");
+        System.out.print("Number: ");
+        int number = sc.nextInt();
+
+
+        System.out.print("Holder: ");
+        sc.nextLine();
+        String holder = sc.nextLine();
+
+
+        System.out.print("Initial Balance: ");
+        double balance = sc.nextDouble();
+
+        System.out.print("Withdraw Limit: ");
+        double withdrawLimit = sc.nextDouble();
+
+        Account account = new Account(number, holder, balance, withdrawLimit);
+
+        System.out.println();
+        System.out.print("Enter amount for withdraw: ");
+
         try {
-            System.out.println("Enter account data");
-            System.out.print("Number: ");
-            int number = sc.nextInt();
-
-
-            System.out.print("Holder: ");
-            String holder = sc.next();
-            sc.nextLine();
-
-
-            System.out.print("Initial Balance: ");
-            double balance = sc.nextDouble();
-
-            System.out.print("Withdraw Limit: ");
-            double withdrawLimit = sc.nextDouble();
-
-            Account account = new Account(number, holder, balance, withdrawLimit);
-
-            System.out.println();
-            System.out.print("Enter amount for withdraw: ");
             account.withdraw(sc.nextDouble());
 
-            System.out.println("New Balance: " + account.getBalance());
+            System.out.printf("New Balance: %.2f%n", account.getBalance());
 
-        } catch (InputMismatchException e) {
-            System.out.println("Must be a number");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (BusinessExceptions msg) {
+            System.out.println(msg.getMessage());
         }
-
         sc.close();
     }
 }
